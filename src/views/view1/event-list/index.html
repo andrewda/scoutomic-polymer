@@ -1,0 +1,66 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../shared-styles.html">
+
+<dom-module id="event-list">
+  <template>
+    <template is="dom-repeat" items="{{events}}">
+	<style include="shared-styles">
+	  :host {
+		display: block;
+
+		padding: 10px;
+	  }
+	</style>
+
+		<a href="/view2/:{{ item.key }}">
+		    <div class="card" style="width:445px">
+		      <h1>{{ item.name }}</h1>
+		      <p>{{ item.location }}</p>
+		      <p>{{ item.key }}</p>
+		    </div>
+		</a>
+    </template>
+  </template>
+
+  <script>
+  setTimeout(function() {
+    Polymer({
+      is: 'event-list',
+      ready: function() {
+		  /*this.events = [
+  			  {name: 'Wilsonville Event', location: 'Wilsonville, OR, USA', key: '2016orwil'},
+  			  {name: 'Philomath Event', location: 'Philomath, OR, USA', key: '2016orphi'},
+  			  {name: 'Another Event', location: 'Another, OR, USA', key: '2016orano'}
+  		  ];*/
+
+		  this.addEvent('Wilsonville', 'oregon', '2016')
+
+		  var self = this;
+		  setTimeout(function() {
+			 self.addEvent('Wilsonville2', 'o2regon', '20316')
+			 console.log('added')
+		 }, 500)
+      },
+
+	  addEvent: function(name, location, key) {
+		if (this.events) {
+		  	this.events.push({
+				name: name,
+				location: location,
+				key: key
+			});
+		} else {
+			this.events = [
+				{
+					name: name,
+					location: location,
+					key: key
+				}
+			]
+		}
+		console.log(this.events)
+	  }
+    });
+}, 5000);
+  </script>
+</dom-module>
